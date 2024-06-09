@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.is-invalid {
+    border-color: red;
+    --tw-ring-color: red;
+}
+.invalid-feedback {
+    color: red;
+    font-size: 0.875rem; /* Menyamakan dengan ukuran teks tailwind */
+    margin-top: 0.25rem; /* Menambahkan jarak atas */
+}
