@@ -1,6 +1,7 @@
 How to run this app:
 - composer i
 - npm i
+- php artisan key:generate
 - create a database with the name "taruma_space"
 - php artisan migrate
 - npm run dev
