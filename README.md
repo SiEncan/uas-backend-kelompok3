@@ -4,6 +4,8 @@ How to run this app:
     
 - npm i
 
+- create a database with the name "taruma_space"
+
 - php artisan migrate
 
 - npm run dev
