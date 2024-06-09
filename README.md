@@ -1,9 +1,12 @@
 <p "align="center"> How to run this app:
 - composer i
+    
 - npm i
+
 - php artisan migrate
 
 - npm run dev
+
 - php artisan serve
 </p>
 
