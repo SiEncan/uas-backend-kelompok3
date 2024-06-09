@@ -5,9 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DiscussionsController;
+use App\Http\Controllers\CommunityController;
 
 Route::get('/', [DiscussionsController::class, 'home'])->middleware('auth');
 Route::get('/discussion/{id}', [DiscussionsController::class, 'viewDiscussion'])->middleware('auth');
+
+Route::get('/community', [CommunityController::class, 'home'])->middleware('auth');
+Route::get('/community/{id}', [CommunityController::class, 'viewCommunity'])->middleware('auth');
+Route::post('/community', [CommunityController::class, 'createCommunity']);
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login')->middleware('guest');
