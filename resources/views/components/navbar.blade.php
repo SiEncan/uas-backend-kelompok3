@@ -16,7 +16,7 @@
       </div>
       <div class="ml-4 flex items-center md:ml-6 space-x-5">
         <h1 class="text-base font-medium leading-none text-gray-300 py-1">
-          Hi, <a href="/profile" class="text-white hover:underline" >{{ request()->user()->username }}</a>!
+          Hi, <a href="/myprofile" class="text-white hover:underline" >{{ request()->user()->username }}</a>!
         </h1>
         <form action="/logout" method="POST">
           @csrf
