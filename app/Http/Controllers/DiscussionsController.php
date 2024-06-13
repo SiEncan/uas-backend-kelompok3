@@ -17,4 +17,17 @@ class DiscussionsController extends Controller
         $discussion = Discussion::findOrFail($id);
         return view('discussion', ['title' => "Dicussion Room", 'discussion' => $discussion]);
     }
+
+    public function createDiscussion(Request $request){
+        $validatedData = $request->validate([
+            'title' => 'min:1|max:255',
+            'content' => 'min:5|max:10000',
+            'author_id' => 'required',
+            'community_id' => 'required'
+        ]);
+
+        Discussion::create($validatedData);
+
+        return redirect("/community/{$request->community_id}")->with('success', 'Discussion Posted!');
+    }
 }

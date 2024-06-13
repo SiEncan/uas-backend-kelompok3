@@ -25,4 +25,10 @@ class CommunityController extends Controller
 
         return redirect('/community')->with('success', 'Community Created!');
     }
+
+    public function viewCommunity($id){
+        $community = Community::findOrFail($id);
+        $discussions = $community->discussions()->orderBy('created_at', 'desc')->get();
+        return view('community', ['title' => $community['name'], 'community_id' => $id, 'discussions' => $discussions]);
+    }
 }
