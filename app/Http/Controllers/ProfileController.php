@@ -32,4 +32,28 @@ class ProfileController extends Controller
 
         return redirect('/myprofile')->with('success', 'Profile Updated!');
     }
+
+    public function updatePassword(Request $request) {
+
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'current_password' => 'min:5|max:255',
+            'new_password' => 'min:5|max:255|same:new_confirm_password',
+            'new_confirm_password' => 'min:5|max:255'
+        ]);
+
+        if (!Hash::check($validatedData['current_password'], $user->password)) {
+            return back()->withErrors(['current_password' => 'Password does not match your current password.']);
+        }
+
+        $user->password = Hash::make($validatedData['new_password']);
+        $user->save();
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('success', 'Password updated successfully. Please log in again.');
+    }
 }

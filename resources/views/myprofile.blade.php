@@ -52,4 +52,36 @@
       <button type="submit" class="bg-red-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded">Save</button>
     </div>
   </form>
+  <form action="/update-private-info" method="POST">
+    @method('PATCH')
+    @csrf
+    <h2 class="text-l font-semibold mb-4">Private Info</h2>
+    <div class="mb-6 max-w-md">
+      <label for="current_password" class="block text-sm font-medium text-gray-700">Current Password</label>
+      <input type="password" id="current_password" name="current_password" required class="@error('current_password') is-invalid @enderror mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      @error('current_password')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+
+    <div class="mb-6 max-w-md">
+      <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>
+      <input type="password" id="new_password" name="new_password" required class="@error('new_password') is-invalid @enderror mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      @error('new_password')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+    <div class="mb-6 max-w-md">
+      <label for="new_confirm_password" class="block text-sm font-medium text-gray-700">New Password Confirmation</label>
+      <input type="password" id="new_confirm_password" name="new_confirm_password" required class="@error('new_confirm_password') is-invalid @enderror mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      @error('new_confirm_password')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+
+    <div class="flex space-x-4 justify-end mb-4 pb-4 border-b border-gray-200">
+      <button type="button" class="text-black hover:underline font-medium" onclick="window.history.back()">Cancel</button>
+      <button type="submit" class="bg-red-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded">Save</button>
+    </div>
+  </form>
 </x-layout>
