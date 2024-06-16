@@ -7,10 +7,12 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DiscussionsController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentsController;
 
 Route::get('/', [DiscussionsController::class, 'home'])->middleware('auth');
 Route::get('/discussion/{id}', [DiscussionsController::class, 'viewDiscussion'])->middleware('auth');
 Route::post('/discussion', [DiscussionsController::class, 'createDiscussion'])->middleware('auth');
+Route::post('/discussion/post-comment', [CommentsController::class, 'create'])->middleware('auth');
 
 Route::get('/community', [CommunityController::class, 'home'])->middleware('auth');
 Route::get('/community/{id}', [CommunityController::class, 'viewCommunity'])->middleware('auth');
