@@ -47,7 +47,9 @@
           <div class="flex items-center mb-4">
             <img class="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User Avatar">
             <div class="ml-4">
-              <h2 class="text-xl font-semibold">{{$discussion['author']['username']}}</h2>
+              <a href="/profile/{{ $discussion['author_id'] }}">
+                <h2 class="text-xl font-semibold hover:underline">{{$discussion['author']['username']}}</h2>
+              </a>
               <p class="text-gray-600">{{ $discussion['created_at']->format('N M') }} at {{ $discussion['created_at']->format('g:i A') }}</p>
             </div>
           </div>

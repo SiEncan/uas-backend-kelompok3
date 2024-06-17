@@ -14,6 +14,11 @@ class ProfileController extends Controller
         return view('myprofile', ['title' => 'My Profile']);
     }
 
+    public function profileView($id){
+        $user = User::withCount('discussions')->findOrFail($id);
+        return view('profile', ['title' => 'Profile', 'user' => $user]);
+    }
+    
     public function updateInfo(Request $request) {
 
         $user = Auth::user();

@@ -26,5 +26,6 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
 Route::get('/myprofile', [ProfileController::class, 'myProfileView'])->middleware('auth');
+Route::get('/profile/{id}', [ProfileController::class, 'profileView'])->middleware('auth');
 Route::patch('/update-public-info', [ProfileController::class, 'updateInfo'])->middleware('auth');
 Route::patch('/update-private-info', [ProfileController::class, 'updatePassword'])->middleware('auth');

@@ -5,7 +5,9 @@
     <div class="flex items-center mb-4">
       <img class="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User Avatar">
       <div class="ml-4">
-        <h2 class="text-xl font-semibold">{{$discussion['author']['username']}}</h2>
+        <a href="/profile/{{ $discussion['author_id'] }}">
+          <h2 class="text-xl font-semibold hover:underline">{{$discussion['author']['username']}}</h2>
+        </a>
         <p class="text-gray-600">{{ $discussion['created_at']->format('N M') }} at {{ $discussion['created_at']->format('g:i A') }}</p>
       </div>
     </div>
@@ -38,7 +40,9 @@
           </div>
           <div class="ml-4">
             <div class="bg-gray-100 p-3 rounded-lg shadow-sm">
-              <h4 class="text-md font-semibold text-gray-800">{{ $comment['author']['name'] }}</h4>
+              <a href="/profile/{{ $discussion['author_id'] }}">
+                <h4 class="text-md font-semibold text-gray-800 hover:underline">{{ $comment['author']['name'] }}</h4>
+              </a>
               <p class="text-gray-600">
                 {{ $comment['content'] }}
               </p>

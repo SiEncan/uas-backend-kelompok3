@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -28,7 +29,7 @@ class User extends Authenticatable
     protected $guarded = [];
 
     public function discussions(): HasMany {
-        return $this->hasMany(Discussion::class);
+        return $this->hasMany(Discussion::class, 'author_id');
     }
 
     public function comments() : HasMany {
@@ -36,7 +37,7 @@ class User extends Authenticatable
     }
 
     public function communities() : HasMany {
-        return $this->hasMany(Community::class);
+        return $this->hasMany(Community::class, 'creator_id');
     }
 
 
