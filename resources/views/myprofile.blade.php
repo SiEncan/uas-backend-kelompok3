@@ -103,6 +103,13 @@
       <button type="submit" class="bg-red-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded">Save</button>
     </div>
   </form>
+  <div class="flex justify-end">
+    <form action="/profile/{{ auth()->user()->id }}" method="POST" onsubmit="return confirm('Are you sure want to delete your account?');">
+      @csrf
+      @method('DELETE')
+      <button type="submit" class="text-red-700 hover:underline">Delete Account</button>
+    </form>
+  </div>
   <script>
     function previewImage(event) {
       const reader = new FileReader();

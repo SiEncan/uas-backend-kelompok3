@@ -70,4 +70,17 @@ class ProfileController extends Controller
 
         return redirect('/login')->with('success', 'Password updated successfully. Please log in again.');
     }
+
+    public function deleteProfile(Request $request,$id){
+        $user = User::findOrFail($id);
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        $user->delete();
+
+        return redirect('/login')->with('success', 'Your account has been deleted.');
+    }
 }
