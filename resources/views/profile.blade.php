@@ -2,7 +2,12 @@
   <x-slot:title>{{$title}}</x-slot:title>
   <div class="bg-white rounded-lg shadow-lg overflow-hidden">
     <div class="flex items-center p-4">
-      <img class="w-24 h-24 rounded-full mx-auto" src="https://via.placeholder.com/150" alt="Profile Picture">
+      <!-- <img class="w-24 h-24 rounded-full mx-auto" src="https://via.placeholder.com/150" alt="Profile Picture"> -->
+      @if($user['profile_picture'])
+        <img class="w-36 h-36 rounded-full mx-auto object-cover overflow-hidden" src="{{ asset('storage/' . $user['profile_picture']) }}" alt="Profile Picture">
+      @else
+        <img class="w-36 h-36 rounded-full mx-auto object-cover overflow-hidden" src="{{ asset('images/default_pp.png') }}" alt="Default Profile Picture">
+      @endif
     </div>
     <div class="p-4">
       <h2 class="text-center text-2xl font-bold text-gray-800">{{ $user["username"] }}</h2>

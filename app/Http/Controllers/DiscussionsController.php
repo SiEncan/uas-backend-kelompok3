@@ -33,4 +33,23 @@ class DiscussionsController extends Controller
 
         return redirect("/community/{$request->community_id}")->with('success', 'Discussion Posted!');
     }
+
+    public function searchDiscussion(Request $request){
+        $validatedSearchKey = $request->validate([
+            'search_key' => 'required|string|max:255',
+        ]);
+
+        $discussions = Discussion::where('title', 'like', '%' . $validatedSearchKey['search_key'] . '%')
+                                ->orWhere('content', 'like', '%' . $validatedSearchKey['search_key'] . '%')
+                                ->get();
+
+        if ($discussions->isEmpty()) {
+            return view('home', [
+                'title' => "No discussion found",
+                'discussions' => $discussions,
+            ]);
+        }
+
+        return view('home', ['title' => "Search: {$validatedSearchKey['search_key']}", 'discussions' => $discussions]);
+    }
 }

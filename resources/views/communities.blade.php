@@ -48,7 +48,7 @@
             <div class="bg-white p-10 rounded-lg shadow flex items-center hover:bg-gray-100"> 
               <div>
                 <h2 class="text-xl font-bold mb-1">{{ $community['name']}}</h2>
-                <h2 class="text-l mb-3">Creator: {{ $community['creator']['name'] }}</h2>
+                <h2 class="text-l mb-3">Creator: {{ $community['creator']['username'] }}</h2>
                 <p class="text-gray-600">{{ $community['description']}}</p>
               </div>
             </div>

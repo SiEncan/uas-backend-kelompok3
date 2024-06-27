@@ -3,7 +3,11 @@
   @foreach ($discussions as $discussion)
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">
       <div class="flex items-center mb-4">
-        <img class="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User Avatar">
+        @if($discussion['author']['profile_picture'])
+          <img class="rounded-full w-12 h-12 object-cover overflow-hidden" src="{{ asset('storage/' . $discussion['author']['profile_picture']) }}" alt="Profile Picture">
+        @else
+          <img class="rounded-full w-12 h-12 object-cover overflow-hidden" src="{{ asset('images/default_pp.png') }}" alt="Default Profile Picture">
+        @endif
         <div class="ml-4">
           <a href="/profile/{{ $discussion['author_id'] }}">
             <h2 class="text-xl font-semibold hover:underline">{{ $discussion['author']['username'] }}</h2>

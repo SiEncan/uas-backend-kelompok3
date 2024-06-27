@@ -3,7 +3,12 @@
   
   <div class="bg-white shadow-md rounded-lg p-6 mb-6">
     <div class="flex items-center mb-4">
-      <img class="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User Avatar">
+      <!-- <img class="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User Avatar"> -->
+      @if($discussion['author']['profile_picture'])
+        <img class="rounded-full w-12 h-12 object-cover overflow-hidden" src="{{ asset('storage/' . $discussion['author']['profile_picture']) }}" alt="Profile Picture">
+      @else
+        <img class="rounded-full w-12 h-12 object-cover overflow-hidden" src="{{ asset('images/default_pp.png') }}" alt="Default Profile Picture">
+      @endif
       <div class="ml-4">
         <a href="/profile/{{ $discussion['author_id'] }}">
           <h2 class="text-xl font-semibold hover:underline">{{$discussion['author']['username']}}</h2>
@@ -35,13 +40,18 @@
     <div class="mt-4 space-y-4">
       @foreach ($comments as $comment)
         <div class="flex items-start">
-          <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+          <!-- <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
             <span class="text-xl font-bold">B</span>
-          </div>
+          </div> -->
+          @if($comment['author']['profile_picture'])
+            <img class="rounded-full w-12 h-12 object-cover overflow-hidden" src="{{ asset('storage/' . $comment['author']['profile_picture']) }}" alt="Profile Picture">
+          @else
+            <img class="rounded-full w-12 h-12 object-cover overflow-hidden" src="{{ asset('images/default_pp.png') }}" alt="Default Profile Picture">
+          @endif
           <div class="ml-4">
             <div class="bg-gray-100 p-3 rounded-lg shadow-sm">
-              <a href="/profile/{{ $discussion['author_id'] }}">
-                <h4 class="text-md font-semibold text-gray-800 hover:underline">{{ $comment['author']['name'] }}</h4>
+              <a href="/profile/{{ $comment['author_id'] }}">
+                <h4 class="text-md font-semibold text-gray-800 hover:underline">{{ $comment['author']['username'] }}</h4>
               </a>
               <p class="text-gray-600">
                 {{ $comment['content'] }}

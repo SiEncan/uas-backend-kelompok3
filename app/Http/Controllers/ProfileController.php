@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -27,7 +28,15 @@ class ProfileController extends Controller
             'name' => 'nullable|min:5|max:255',
             'gender' => 'nullable|in:Male,Female',
             'email' => 'nullable|email:dns|unique:users',
+            'profile_picture' => 'image|file'
         ]);
+
+        if($request->file('profile_picture')) {
+            if ($request->current_profile_picture) {
+                Storage::delete($request->current_profile_picture);
+            }
+            $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_pictures');
+        }
 
         $filteredData = array_filter($validatedData, function ($value) {
             return !is_null($value);

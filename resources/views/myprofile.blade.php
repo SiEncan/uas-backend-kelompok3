@@ -11,7 +11,7 @@
         </span>
     </div>
   @endif
-  <form action="/update-public-info" method="POST">
+  <form action="/update-public-info" method="POST" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
     <h2 class="text-l font-semibold mb-4">Public Info</h2>
@@ -45,6 +45,25 @@
         <option value="Male" {{ auth()->user()->gender == 'Male' ? 'selected' : '' }}>Male</option>
         <option value="Female" {{ auth()->user()->gender == 'Female' ? 'selected' : '' }}>Female</option>
       </select>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Current Profile Picture</label>
+      <div class="flex items-center space-x-4">
+        <input name="current_profile_picture" value="{{ auth()->user()->profile_picture }}" type="hidden">
+        @if(auth()->user()->profile_picture)
+          <img id="profile_picture" class="rounded-full w-32 h-32 object-cover overflow-hidden" src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture">
+        @else
+          <img id="profile_picture" class="rounded-full w-32 h-32 object-cover overflow-hidden" src="{{ asset('images/default_pp.png') }}" alt="Default Profile Picture">
+        @endif
+        <label for="input_profile_picture" class="shadow-md inline-flex items-center bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 text-sm font-semibold py-2 px-4 rounded cursor-pointer">
+          Change
+        </label>
+        <input type="file" name="profile_picture" id="input_profile_picture" class="@error('profile_picture') is-invalid @enderror hidden" onchange="previewImage(event)">
+        @error('profile_picture')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
     </div>
 
     <div class="flex space-x-4 justify-end mb-4 pb-4 border-b border-gray-200">
@@ -84,4 +103,14 @@
       <button type="submit" class="bg-red-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded">Save</button>
     </div>
   </form>
+  <script>
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        const output = document.getElementById('profile_picture');
+        output.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
 </x-layout>

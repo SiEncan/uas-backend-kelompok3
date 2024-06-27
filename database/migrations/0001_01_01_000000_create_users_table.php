@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
 
