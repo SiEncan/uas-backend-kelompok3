@@ -74,6 +74,10 @@ class ProfileController extends Controller
     public function deleteProfile(Request $request,$id){
         $user = User::findOrFail($id);
 
+        if ($user->profile_picture) {
+            Storage::delete($user->profile_picture);
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();
