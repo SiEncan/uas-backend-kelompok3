@@ -1,6 +1,29 @@
 <x-layout>
   <x-slot:title>{{$title}}</x-slot:title>
-  
+  @if(session()->has('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-5 rounded relative flex justify-center items-center" role="alert">
+      <span class="block text-center w-full">{{ session('success') }}</span>
+      <span class="absolute top-0 right-0 px-4 py-3">
+        <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="this.parentElement.parentElement.style.display='none';">
+          <title>Close</title>
+          <path d="M14.348 14.849a.5.5 0 01-.707 0L10 11.207l-3.641 3.642a.5.5 0 01-.707-.707L9.293 10.5 5.651 6.857a.5.5 0 01.707-.707L10 9.793l3.641-3.642a.5.5 0 01.707.707L10.707 10.5l3.641 3.642a.5.5 0 010 .707z"/>
+        </svg>
+      </span>
+    </div>
+  @endif
+
+  @if(session()->has('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative flex justify-center items-center" role="alert">
+      <span class="block text-center w-full">{{ session('error') }}</span>
+      <span class="absolute top-0 right-0 px-4 py-3">
+        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="this.parentElement.parentElement.style.display='none';">
+            <title>Close</title>
+            <path d="M14.348 14.849a.5.5 0 01-.707 0L10 11.207l-3.641 3.642a.5.5 0 01-.707-.707L9.293 10.5 5.651 6.857a.5.5 0 01.707-.707L10 9.793l3.641-3.642a.5.5 0 01.707.707L10.707 10.5l3.641 3.642a.5.5 0 010 .707z"/>
+        </svg>
+      </span>
+    </div>
+  @endif
+
   <div class="bg-white shadow-md rounded-lg p-6 mb-6">
     <div class="flex items-center mb-4">
       <!-- <img class="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User Avatar"> -->
@@ -20,6 +43,17 @@
     <p class="text-gray-800 mb-4">
       {{ $discussion['content']}}
     </p>
+
+    @if ($discussion['author_id'] == auth()->user()->id)
+      <div class="flex justify-end">
+        <form action="/discussion/{{ $discussion['id'] }}" method="POST" onsubmit="return confirm('Are you sure want to delete this discussion?');">
+          @csrf
+          @method('DELETE')
+          <input type="hidden" id="community_id" name="community_id" value="{{ $discussion['community']['id'] }}">
+          <button type="submit" class="px-4 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900">Delete Discussion</button>
+        </form>
+      </div>
+    @endif
   </div>
   
   <div class="bg-white shadow-md rounded-lg p-6 mb-6">

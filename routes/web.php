@@ -12,6 +12,7 @@ use App\Http\Controllers\CommentsController;
 Route::get('/', [DiscussionsController::class, 'home'])->middleware('auth');
 Route::get('/discussion/{id}', [DiscussionsController::class, 'viewDiscussion'])->middleware('auth');
 Route::post('/discussion', [DiscussionsController::class, 'createDiscussion'])->middleware('auth');
+Route::delete('/discussion/{id}', [DiscussionsController::class, 'deleteDiscussion'])->middleware('auth');
 Route::post('/discussion/post-comment', [CommentsController::class, 'create'])->middleware('auth');
 Route::get('/search-discussion', [DiscussionsController::class, 'searchDiscussion'])->middleware('auth');
 

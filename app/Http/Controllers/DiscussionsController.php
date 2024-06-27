@@ -52,4 +52,16 @@ class DiscussionsController extends Controller
 
         return view('home', ['title' => "Search: {$validatedSearchKey['search_key']}", 'discussions' => $discussions]);
     }
+
+    public function deleteDiscussion(Request $request,$id){
+        $discussion = Discussion::findOrFail($id);
+
+        if ($discussion->author_id != auth()->user()->id) {
+            return redirect()->back()->with('error', 'You are not the author of this discussion.');
+        }
+
+        $discussion->delete();
+
+        return redirect("/community/{$request->community_id}")->with('success', 'Discussion Deleted!');
+    }
 }
