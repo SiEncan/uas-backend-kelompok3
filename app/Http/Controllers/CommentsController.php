@@ -21,4 +21,16 @@ class CommentsController extends Controller
 
         return redirect()->back();
     }
+
+    public function deleteComment(Request $request,$id){
+        $comment = Comment::findOrFail($id);
+
+        if ($comment->author_id != auth()->user()->id) {
+            return redirect()->back()->with('error', 'You are not the author of this comment.');
+        }
+
+        $comment->delete();
+
+        return redirect("/discussion/{$request->discussion_id}")->with('success', 'Comment Deleted!');
+    }
 }

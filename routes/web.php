@@ -14,6 +14,7 @@ Route::get('/discussion/{id}', [DiscussionsController::class, 'viewDiscussion'])
 Route::post('/discussion', [DiscussionsController::class, 'createDiscussion'])->middleware('auth');
 Route::delete('/discussion/{id}', [DiscussionsController::class, 'deleteDiscussion'])->middleware('auth');
 Route::post('/discussion/post-comment', [CommentsController::class, 'create'])->middleware('auth');
+Route::delete('/comment/{id}', [CommentsController::class, 'deleteComment'])->middleware('auth');
 Route::get('/search-discussion', [DiscussionsController::class, 'searchDiscussion'])->middleware('auth');
 
 Route::get('/community', [CommunityController::class, 'home'])->middleware('auth');

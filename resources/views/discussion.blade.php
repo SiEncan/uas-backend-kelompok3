@@ -92,6 +92,16 @@
               </p>
             </div>
             <p class="mt-1 text-sm text-gray-600">{{ $comment['created_at']->format('N M') }} at {{ $comment['created_at']->format('g:i A') }}</p>
+            @if ($comment['author_id'] == auth()->user()->id)
+              <div class="flex justify-end mt-2">
+                <form action="/comment/{{ $comment['id'] }}" method="POST" onsubmit="return confirm('Are you sure want to delete this comment?');">
+                  @csrf
+                  @method('DELETE')
+                  <input type="hidden" id="discussion_id" name="discussion_id" value="{{ $discussion['id'] }}">
+                  <button type="submit" class="text-red-700 hover:underline">Delete Comment</button>
+                </form>
+              </div>
+            @endif
           </div>
         </div>
       @endforeach
