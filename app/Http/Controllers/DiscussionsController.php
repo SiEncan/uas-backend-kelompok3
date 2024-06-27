@@ -18,7 +18,7 @@ class DiscussionsController extends Controller
     public function viewDiscussion($id){
         $discussion = Discussion::findOrFail($id);
         $comments = $discussion->comments()->orderBy('created_at', 'desc')->get();
-        return view('discussion', ['title' => "Dicussion Room", 'discussion' => $discussion, 'comments' => $comments]);
+        return view('discussion', ['title' => $discussion['community']['name'], 'discussion' => $discussion, 'comments' => $comments]);
     }
 
     public function createDiscussion(Request $request){
