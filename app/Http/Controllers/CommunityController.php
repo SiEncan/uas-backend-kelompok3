@@ -29,6 +29,6 @@ class CommunityController extends Controller
     public function viewCommunity($id){
         $community = Community::findOrFail($id);
         $discussions = $community->discussions()->withCount('comments')->orderBy('created_at', 'desc')->get();
-        return view('community', ['title' => $community['name'], 'community_id' => $id, 'discussions' => $discussions]);
+        return view('community', ['title' => $community['name'], 'description' => $community['description'], 'community_id' => $id, 'discussions' => $discussions]);
     }
 }

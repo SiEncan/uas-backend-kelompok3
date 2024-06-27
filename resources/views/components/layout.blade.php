@@ -12,7 +12,12 @@
 <body class="h-full">
   <div class="min-h-full">
     <x-navbar></x-navbar>
-    <x-header>{{$title}}</x-header>
+    <x-header>
+      @if (str_contains($title, 'Community:'))
+        <x-slot:description>{{ $description }}</x-slot:description>
+      @endif
+      {{$title}}
+    </x-header>
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         {{$slot}}

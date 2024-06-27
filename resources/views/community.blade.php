@@ -1,5 +1,6 @@
 <x-layout>
   <x-slot:title>Community: {{$title}}</x-slot:title>
+  <x-slot:description>{{ $description }}</x-slot:description>
   @if(session()->has('success'))
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-5 rounded relative flex justify-center items-center" role="alert">
         <span class="block text-center w-full">{{ session('success') }}</span>
