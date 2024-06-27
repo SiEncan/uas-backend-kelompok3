@@ -15,6 +15,7 @@
           <h2 class="text-gray-600">{{ $discussion['created_at']->format('N M') }} at {{ $discussion['created_at']->format('g:i A') }}</h2>
         </div>
       </div>
+      <h2 class="text-gray-400">{{ $discussion['community']['name'] }}</h2>
       <h3 class="text-2xl font-bold mb-4">{{ $discussion['title']}}</h3>
       <p class="text-gray-800 mb-4">
         {{ Str::limit($discussion['content'], 200) }}
