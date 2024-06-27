@@ -50,7 +50,7 @@
           @csrf
           @method('DELETE')
           <input type="hidden" id="community_id" name="community_id" value="{{ $discussion['community']['id'] }}">
-          <button type="submit" class="px-4 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900">Delete Discussion</button>
+          <button type="submit" class="text-red-700 hover:underline">Delete Discussion</button>
         </form>
       </div>
     @endif
